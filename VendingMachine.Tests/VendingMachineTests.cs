@@ -6,9 +6,12 @@ namespace VendingMachine.Tests
     public class VendingMachineTests
     {
         [Test]
-        public void Nothing()
+        public void whenThereAreNoCoinsInsertedTheMachineDisplaysInsertCoin()
         {
+            var vendingMachine = new VendingMachine();
+            var display = vendingMachine.GetDisplay();
 
+            Assert.AreEqual("INSERT COIN", display);
         }
     }
 }

@@ -1,0 +1,6 @@
+C:\Users\choffman\OneDrive - Strategic America\.NET Projects\VendingMachine\VendingMachine\bin\Debug\VendingMachine.dll
+C:\Users\choffman\OneDrive - Strategic America\.NET Projects\VendingMachine\VendingMachine\bin\Debug\VendingMachine.pdb
+C:\Users\choffman\OneDrive - Strategic America\.NET Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.csprojResolveAssemblyReference.cache
+C:\Users\choffman\OneDrive - Strategic America\.NET Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.csproj.CoreCompileInputs.cache
+C:\Users\choffman\OneDrive - Strategic America\.NET Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.dll
+C:\Users\choffman\OneDrive - Strategic America\.NET Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.pdb
