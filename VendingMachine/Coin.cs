@@ -12,6 +12,6 @@ namespace VendingMachine
         public double Width;
         public double Weight;
         public double Diameter;
-        public bool ShouldBeReturned;
+        public bool ShouldBeReturned = false;
     }
 }

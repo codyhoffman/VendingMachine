@@ -10,9 +10,9 @@ namespace VendingMachine
 
             if (IsQuarter(coin))
                 coin.Value = .25;
-            if (IsDime(coin))
+            else if (IsDime(coin))
                 coin.Value = .10;
-            if (IsNickel(coin))
+            else if (IsNickel(coin))
                 coin.Value = .05;
             else
                 coin.ShouldBeReturned = true;
