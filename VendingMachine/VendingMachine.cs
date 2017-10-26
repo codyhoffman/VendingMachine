@@ -20,11 +20,11 @@
             return displayValue;
         }
 
-        public void InsertCoin(double diameter, double width, double weight)
+        public void InsertCoin(Coin coin)
         {
-            var coinValue = coinValidator.DetermineCoinValue(diameter, width, weight);
+            var validatedCoin = coinValidator.DetermineCoinValue(coin);
 
-            UpdateCurrencyTotal(coinValue);
+            UpdateCurrencyTotal(validatedCoin.Value);
         }
 
         private void UpdateCurrencyTotal(double val)

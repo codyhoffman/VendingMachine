@@ -5,6 +5,43 @@ namespace VendingMachine.Tests
     [TestFixture]
     public class VendingMachineTests
     {
+        private Coin Quarter()
+        {
+            return new Coin
+            {
+                Diameter = 24.26,
+                Width = 1.75,
+                Weight = 5.67
+            };
+        }
+        private Coin Dime()
+        {
+            return new Coin
+            {
+                Diameter = 17.91,
+                Width = 1.35,
+                Weight = 2.268
+            };
+        }
+        private Coin Nickel()
+        {
+            return new Coin
+            {
+                Diameter = 21.21,
+                Width = 1.95,
+                Weight = 5.00
+            };
+        }
+        private Coin Penny()
+        {
+            return new Coin
+            {
+                Diameter = 15.00,
+                Width = 1.55,
+                Weight = 3.35
+            };
+        }
+
         [Test]
         public void beforeThereAreCoinsInsertedTheMachineDisplaysInsertCoin()
         {
@@ -21,7 +58,7 @@ namespace VendingMachine.Tests
             var coinValidator = new CoinValidator();
             var vendingMachine = new VendingMachine(coinValidator);
 
-            vendingMachine.InsertCoin(24.260, .069, 5.670);
+            vendingMachine.InsertCoin(Quarter());
 
             var display = vendingMachine.GetDisplay();
 

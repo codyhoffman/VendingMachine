@@ -4,27 +4,43 @@ namespace VendingMachine
 {
     public class CoinValidator
     {
-        public double DetermineCoinValue(double diameter, double width, double weight)
+        public Coin DetermineCoinValue(Coin coin)
         {
-            //isQuarter(diameter, width, weight);
-            //isDime(diameter, width, weight);
-            //isNickel(diameter, width, weight);
-            return .25;
+            coin.Value = 0.0;
+
+            if (IsQuarter(coin))
+                coin.Value = .25;
+            if (IsDime(coin))
+                coin.Value = .10;
+            if (IsNickel(coin))
+                coin.Value = .05;
+            else
+                coin.ShouldBeReturned = true;
+
+            return coin;
+        }
+        private bool IsQuarter(Coin coin)
+        {
+            if (coin.Diameter.Equals(24.26) && coin.Width.Equals(1.75) && coin.Weight.Equals(5.67))
+                return true;
+
+            return false;
         }
 
-        private void isQuarter(double diameter, double width, double weight)
+        private bool IsDime(Coin coin)
         {
-            throw new NotImplementedException();
+            if (coin.Diameter.Equals(17.91) && coin.Width.Equals(1.35) && coin.Weight.Equals(2.268))
+                return true;
+
+            return false;
         }
 
-        private void isDime(double diameter, double width, double weight)
+        private bool IsNickel(Coin coin)
         {
-            throw new NotImplementedException();
-        }
+            if (coin.Diameter.Equals(21.21) && coin.Width.Equals(1.95) && coin.Weight.Equals(5.00))
+                return true;
 
-        private void isNickel(double diameter, double width, double weight)
-        {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
