@@ -65,18 +65,33 @@ namespace VendingMachine.Tests
             Assert.AreEqual("$0.25", display);
         }
 
-        //[Test]
-        //public void whenAQuarterDimeAndNickelAreInsertedtheMachineDisplays40Cents()
-        //{
-        //    var vendingMachine = new VendingMachine();
+        [Test]
+        public void whenAQuarterDimeAndNickelAreInsertedtheMachineDisplays40Cents()
+        {
+            var coinValidator = new CoinValidator();
+            var vendingMachine = new VendingMachine(coinValidator);
 
-        //    vendingMachine.InsertCoin(24.26, 1.75, 5.67);
-        //    vendingMachine.InsertCoin(17.91, 1.35, 2.268);
-        //    vendingMachine.InsertCoin(21.21, 1.95, 5.00);
+            vendingMachine.InsertCoin(Quarter());
+            vendingMachine.InsertCoin(Dime());
+            vendingMachine.InsertCoin(Nickel());
 
-        //    var display = vendingMachine.GetDisplay();
+            var display = vendingMachine.GetDisplay();
 
-        //    Assert.AreEqual("$.40", display);
-        //}
+            Assert.AreEqual("$0.40", display);
+        }
+
+        [Test]
+        public void givenAPennyAndQuarterItShouldDisplay25Cents()
+        {
+            var coinValidator = new CoinValidator();
+            var vendingMachine = new VendingMachine(coinValidator);
+
+            vendingMachine.InsertCoin(Quarter());
+            vendingMachine.InsertCoin(Penny());
+
+            var display = vendingMachine.GetDisplay();
+            
+            Assert.AreEqual("$0.25", display);
+        }
     }
 }

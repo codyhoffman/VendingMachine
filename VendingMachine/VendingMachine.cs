@@ -1,4 +1,6 @@
-﻿namespace VendingMachine
+﻿using System;
+
+namespace VendingMachine
 {
     public class VendingMachine
     {
@@ -14,7 +16,7 @@
         public string GetDisplay()
         {
             if (currencyTotal > 0)
-                return "$" + currencyTotal.ToString();
+                return "$" + String.Format("{0:0.00}", currencyTotal);
 
             displayValue = "INSERT COIN";
             return displayValue;
@@ -29,7 +31,7 @@
 
         private void UpdateCurrencyTotal(double val)
         {
-            if (val > 0)
+            if (val > 0 || currencyTotal > 0)
                 currencyTotal += val;
             else
                 currencyTotal = 0;
