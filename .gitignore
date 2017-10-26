@@ -4,3 +4,7 @@
 
 /.vs/VendingMachine/v15
 /.vs
+VendingMachine/bin
+VendingMachine/obj
+VendingMachine.Tests/bin
+VendingMachine.Tests/obj
