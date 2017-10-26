@@ -53,6 +53,19 @@ namespace VendingMachine.Tests
             Assert.AreEqual(.25, validatedCoin.Value);
         }
         [Test]
+        public void givenNickelDimeAndQuarterRespectiveValuesAreSet()
+        {
+            var coinValidator = new CoinValidator();
+
+            var validatedQuarter = coinValidator.DetermineCoinValue(Quarter());
+            var validatedDime = coinValidator.DetermineCoinValue(Dime());
+            var validatedNickel = coinValidator.DetermineCoinValue(Nickel());
+
+            Assert.AreEqual(.25, validatedQuarter.Value);
+            Assert.AreEqual(.10, validatedDime.Value);
+            Assert.AreEqual(.05, validatedNickel.Value);
+        }
+        [Test]
         public void givenPennyTheValueIsSetToZeroAndShouldReturnFlagIsTrue()
         {
             var coinValidator = new CoinValidator();
@@ -61,6 +74,15 @@ namespace VendingMachine.Tests
 
             Assert.AreEqual(0.0, validatedCoin.Value);
             Assert.AreEqual(true, validatedCoin.ShouldBeReturned);
+        }
+        [Test]
+        public void whenAValidCoinsValueIsSetItShouldNotBeReturned()
+        {
+            var coinValidator = new CoinValidator();
+
+            var validatedCoin = coinValidator.DetermineCoinValue(Quarter());
+
+            Assert.AreEqual(false, validatedCoin.ShouldBeReturned);
         }
     }
 }
