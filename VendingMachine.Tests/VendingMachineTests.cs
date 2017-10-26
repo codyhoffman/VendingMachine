@@ -93,5 +93,22 @@ namespace VendingMachine.Tests
             
             Assert.AreEqual("$0.25", display);
         }
+
+        [Test]
+        public void whenAProductIsSelectedDispenseTheProduct()
+        {
+            var coinValidator = new CoinValidator();
+            var vendingMachine = new VendingMachine(coinValidator);
+
+            var selection = new Product
+            {
+                Price = 1.00,
+                ProductType = ProductTypes.Cola
+            };
+
+            var dispensedProduct = vendingMachine.SelectProduct(selection);
+
+            Assert.AreEqual(selection, dispensedProduct);
+        }
     }
 }

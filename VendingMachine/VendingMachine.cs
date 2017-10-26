@@ -28,6 +28,10 @@ namespace VendingMachine
 
             UpdateCurrencyTotal(validatedCoin.Value);
         }
+        public Product SelectProduct(Product selection)
+        {
+            return selection;
+        }
 
         private void UpdateCurrencyTotal(double val)
         {
