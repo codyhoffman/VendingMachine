@@ -40,8 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
+    <Compile Include="ButtonType.cs" />
     <Compile Include="Coin.cs" />
     <Compile Include="CoinValidator.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductSelector.cs" />
     <Compile Include="VendingMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

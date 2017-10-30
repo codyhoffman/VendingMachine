@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VendingMachine
+﻿namespace VendingMachine
 {
     public class Coin
     {
@@ -12,6 +6,6 @@ namespace VendingMachine
         public double Width;
         public double Weight;
         public double Diameter;
-        public bool ShouldBeReturned = false;
+        public bool ShouldBeReturned;
     }
 }

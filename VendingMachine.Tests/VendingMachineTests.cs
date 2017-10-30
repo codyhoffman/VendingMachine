@@ -46,7 +46,8 @@ namespace VendingMachine.Tests
         public void beforeThereAreCoinsInsertedTheMachineDisplaysInsertCoin()
         {
             var coinValidator = new CoinValidator();
-            var vendingMachine = new VendingMachine(coinValidator);
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
             var display = vendingMachine.GetDisplay();
 
             Assert.AreEqual("INSERT COIN", display);
@@ -56,7 +57,8 @@ namespace VendingMachine.Tests
         public void whenAQuarterIsInsertedtheMachineDisplaysTwentyFiveCents()
         {
             var coinValidator = new CoinValidator();
-            var vendingMachine = new VendingMachine(coinValidator);
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
 
             vendingMachine.InsertCoin(Quarter());
 
@@ -69,7 +71,8 @@ namespace VendingMachine.Tests
         public void whenAQuarterDimeAndNickelAreInsertedtheMachineDisplays40Cents()
         {
             var coinValidator = new CoinValidator();
-            var vendingMachine = new VendingMachine(coinValidator);
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
 
             vendingMachine.InsertCoin(Quarter());
             vendingMachine.InsertCoin(Dime());
@@ -84,14 +87,56 @@ namespace VendingMachine.Tests
         public void givenAPennyAndQuarterItShouldDisplay25Cents()
         {
             var coinValidator = new CoinValidator();
-            var vendingMachine = new VendingMachine(coinValidator);
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
 
             vendingMachine.InsertCoin(Quarter());
             vendingMachine.InsertCoin(Penny());
 
             var display = vendingMachine.GetDisplay();
-            
+
             Assert.AreEqual("$0.25", display);
+        }
+
+        [Test]
+        public void givenAUnRecognizedCointItShouldDisplayInsertCoin()
+        {
+            var coinValidator = new CoinValidator();
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
+            var fakeCoin = new Coin
+            {
+                Weight = 1.00,
+                Width = .1,
+                Diameter = 10
+            };
+
+            vendingMachine.InsertCoin(fakeCoin);
+
+            var display = vendingMachine.GetDisplay();
+
+            Assert.AreEqual("INSERT COIN", display);
+        }
+
+        [Test]
+        public void whenTheColaButtonIsPressedPRICEIsDisplayed()
+        {
+            var coinValidator = new CoinValidator();
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
+            var colaButton = new Button
+            {
+                IsPressed = true,
+                Type = ButtonType.ColaButton
+            };
+
+            var product = vendingMachine.SelectProduct(colaButton);
+
+            var display = vendingMachine.GetDisplayAfterSelection(product.Price);
+            Assert.AreEqual("PRICE $1.00", display);
+
+            display = vendingMachine.GetDisplay();
+            Assert.AreEqual("INSERT COIN", display);
         }
     }
 }
