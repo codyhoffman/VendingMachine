@@ -138,5 +138,46 @@ namespace VendingMachine.Tests
             display = vendingMachine.GetDisplay();
             Assert.AreEqual("INSERT COIN", display);
         }
+
+        [Test]
+        public void withSufficientFundsInsertedAndCandyIsSelectedTHANKYOUIsDisplayed()
+        {
+            var coinValidator = new CoinValidator();
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
+            var candyButton = new Button
+            {
+                IsPressed = true,
+                Type = ButtonType.CandyButton
+            };
+
+            vendingMachine.InsertCoin(Quarter());
+            vendingMachine.InsertCoin(Quarter());
+            vendingMachine.InsertCoin(Dime());
+            vendingMachine.InsertCoin(Nickel());
+
+            var product = vendingMachine.SelectProduct(candyButton);
+
+            var display = vendingMachine.GetDisplayAfterSelection(product.Price);
+            Assert.AreEqual("THANK YOU", display);
+        }
+
+        [Test]
+        public void withSufficientFundsInsertedAndChipsAreSelectedProductIsDispensed()
+        {
+            var coinValidator = new CoinValidator();
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
+            var chipsButton = new Button { IsPressed = true, Type = ButtonType.ChipsButton };
+            var expectedProduct = new Product { Name = "Chips", Price = .50 };
+
+            vendingMachine.InsertCoin(Quarter());
+            vendingMachine.InsertCoin(Quarter());
+
+            var product = vendingMachine.SelectProduct(chipsButton);
+
+            Assert.AreEqual(expectedProduct.Price, product.Price);
+            Assert.AreEqual(expectedProduct.Name, product.Name);
+        }
     }
 }
