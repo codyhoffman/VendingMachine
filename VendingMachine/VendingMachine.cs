@@ -1,18 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VendingMachine
 {
     public class VendingMachine
     {
         private readonly CoinValidator coinValidator;
+        private readonly ProductSelector productSelector;
+        public List<Product> products;
         private string displayValue = "INSERT COIN";
         private double currencyTotal;
 
-        public VendingMachine(CoinValidator coinValidator)
+        public VendingMachine(CoinValidator coinValidator, ProductSelector productSelector)
         {
             this.coinValidator = coinValidator;
+            this.productSelector = productSelector;
         }
 
+        public string GetDisplayAfterSelection(double price)
+        {
+            if (currencyTotal >= price)
+                return AdjustCurrencyTotal();
+
+            return "PRICE $" + String.Format("{0:0.00}", price);
+        }
         public string GetDisplay()
         {
             if (currencyTotal > 0)
@@ -20,6 +31,12 @@ namespace VendingMachine
 
             displayValue = "INSERT COIN";
             return displayValue;
+        }
+
+        private string AdjustCurrencyTotal()
+        {
+            currencyTotal = 0;
+            return "THANK YOU";
         }
 
         public void InsertCoin(Coin coin)
@@ -31,6 +48,12 @@ namespace VendingMachine
         public Product SelectProduct(Product selection)
         {
             return selection;
+        }
+
+        public Product SelectProduct(Button button)
+        {
+            var product = productSelector.DispenseProduct(button);
+            return product;
         }
 
         private void UpdateCurrencyTotal(double val)
