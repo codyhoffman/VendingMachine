@@ -169,15 +169,16 @@ namespace VendingMachine.Tests
             var productSelector = new ProductSelector();
             var vendingMachine = new VendingMachine(coinValidator, productSelector);
             var chipsButton = new Button { IsPressed = true, Type = ButtonType.ChipsButton };
-            var expectedProduct = new Product { Name = "Chips", Price = .50 };
+            var expectedProduct = new Product { Name = "Chips", Price = .50, IsDispensed = true };
 
             vendingMachine.InsertCoin(Quarter());
             vendingMachine.InsertCoin(Quarter());
 
             var product = vendingMachine.SelectProduct(chipsButton);
 
-            Assert.AreEqual(expectedProduct.Price, product.Price);
+            Assert.AreEqual(expectedProduct.IsDispensed, product.IsDispensed);
             Assert.AreEqual(expectedProduct.Name, product.Name);
+            Assert.AreEqual(expectedProduct.Price, product.Price);
         }
 
         [Test]
@@ -187,13 +188,15 @@ namespace VendingMachine.Tests
             var productSelector = new ProductSelector();
             var vendingMachine = new VendingMachine(coinValidator, productSelector);
             var chipsButton = new Button { IsPressed = true, Type = ButtonType.ChipsButton };
-            var expectedProduct = new Product { Name = "Chips", Price = .50 };
+            var expectedProduct = new Product { Name = "Chips", Price = .50, IsDispensed = false};
 
             vendingMachine.InsertCoin(Quarter());
 
             var product = vendingMachine.SelectProduct(chipsButton);
 
-            Assert.AreNotEqual(expectedProduct.Name, product.Name);
+            Assert.AreEqual(expectedProduct.IsDispensed, product.IsDispensed);
+            Assert.AreEqual(expectedProduct.Name, product.Name);
+            Assert.AreEqual(expectedProduct.Price, product.Price);
         }
     }
 }

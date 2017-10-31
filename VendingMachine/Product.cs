@@ -4,5 +4,6 @@
     {
         public string Name;
         public double Price;
+        public bool IsDispensed;
     }
 }

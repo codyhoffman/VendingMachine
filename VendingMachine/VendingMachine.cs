@@ -55,11 +55,9 @@ namespace VendingMachine
         private Product DispenseProductIfSufficientFunds(Product product)
         {
             if (currencyTotal < product.Price)
-            {
-                var productNotDispensed = productSelector.NoProduct();
-                productNotDispensed.Price = product.Price;
-                return productNotDispensed;
-            }
+                return product;
+
+            product.IsDispensed = true;
             return product;
         }
 
