@@ -35,7 +35,7 @@ namespace VendingMachine
 
         private string AdjustCurrencyTotal()
         {
-            currencyTotal = 0;
+            UpdateCurrencyTotal(0);
             return "THANK YOU";
         }
 
@@ -45,14 +45,21 @@ namespace VendingMachine
 
             UpdateCurrencyTotal(validatedCoin.Value);
         }
-        public Product SelectProduct(Product selection)
-        {
-            return selection;
-        }
-
+   
         public Product SelectProduct(Button button)
         {
             var product = productSelector.DispenseProduct(button);
+            return DispenseProductIfSufficientFunds(product);
+        }
+
+        private Product DispenseProductIfSufficientFunds(Product product)
+        {
+            if (currencyTotal < product.Price)
+            {
+                var productNotDispensed = productSelector.NoProduct();
+                productNotDispensed.Price = product.Price;
+                return productNotDispensed;
+            }
             return product;
         }
 

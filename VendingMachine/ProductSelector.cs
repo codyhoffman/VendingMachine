@@ -16,7 +16,7 @@
             if (type == ButtonType.CandyButton)
                 return DispenseCandy();
             else
-                return null;
+                return NoProduct();
         }
 
         private Product DispenseCola() =>
@@ -33,12 +33,18 @@
                 Price = .50
             };
 
-
         private Product DispenseCandy() =>
             new Product
             {
                 Name = "Candy",
                 Price = .65
+            };
+
+        public Product NoProduct() =>
+            new Product
+            {
+                Name = "No Product",
+                Price = 0
             };
     }
 }

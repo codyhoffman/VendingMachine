@@ -119,7 +119,7 @@ namespace VendingMachine.Tests
         }
 
         [Test]
-        public void whenTheColaButtonIsPressedPRICEIsDisplayed()
+        public void whenTheColaButtonIsPressedPRICEIsDisplayedThenInsertCoin()
         {
             var coinValidator = new CoinValidator();
             var productSelector = new ProductSelector();
@@ -178,6 +178,22 @@ namespace VendingMachine.Tests
 
             Assert.AreEqual(expectedProduct.Price, product.Price);
             Assert.AreEqual(expectedProduct.Name, product.Name);
+        }
+
+        [Test]
+        public void withInsufficientFundsInsertedAndChipsAreSelectedProductIsNotDispensed()
+        {
+            var coinValidator = new CoinValidator();
+            var productSelector = new ProductSelector();
+            var vendingMachine = new VendingMachine(coinValidator, productSelector);
+            var chipsButton = new Button { IsPressed = true, Type = ButtonType.ChipsButton };
+            var expectedProduct = new Product { Name = "Chips", Price = .50 };
+
+            vendingMachine.InsertCoin(Quarter());
+
+            var product = vendingMachine.SelectProduct(chipsButton);
+
+            Assert.AreNotEqual(expectedProduct.Name, product.Name);
         }
     }
 }
