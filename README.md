@@ -1,5 +1,5 @@
 # VendingMachine
-Vending Machine code kata emphasizing TDD and clean code.
+Vending Machine code kata emphasizing TDD and clean code. Still a work in progress, but I had fun with this project and feel it displays my style of development quite well. If anyone has any questions or comments please send them my way, I always appreciate constructive criticism and the opportunity to improve as a young developer! :)
 
 ### Instructions to run the automated build using cake build.
 
